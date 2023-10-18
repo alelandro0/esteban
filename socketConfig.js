@@ -1,24 +1,22 @@
 const { Server: SocketServer } = require("socket.io");
-const express= require('express')
-const app =express()
 
 function initializeSocket(server) {
   const io = new SocketServer(server, {
     // Configuración adicional si es necesaria
   });
-  app.get("/", (req, res) => {
-    res.send("Chat IO");
-});
 
   io.on("connection", (socket) => {
-    console.log("Usuario conectado: " + socket.id);
-    
+    console.log("A user connected: " + socket.id);
 
     socket.on("test-event", (data) => {
-        console.log("Evento recibido:", data);
-        socket.emit("response-event", "¡Conexión exitosa con el servidor Socket.io!");
+      console.log("Received event:", data);
+      socket.emit("response-event", "Successful connection to Socket.io server!");
     });
-});
+
+    socket.on("disconnect", () => {
+      console.log("A user disconnected: " + socket.id);
+    });
+  });
 
   return io;
 }

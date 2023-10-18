@@ -11,8 +11,8 @@ const initializeSocket = require("./socketConfig.js");
 
 require("dotenv").config();
 
-const port = process.env.PORT || 5000;
-const socketPort = process.env.SOCKET_PORT || 5001;
+const expressPort = process.env.PORT || 5000;
+
 
 // Middlewares
 app.use(cors());
@@ -65,15 +65,6 @@ app.get("/", (req, res) => {
     res.send("Hello, world!");
 });
 
-server.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+server.listen(expressPort, () => {
+    console.log(`Express Server is running on port: ${expressPort}`);
 });
-// Inicializar el servidor Socket.io en el puerto correcto (socketPort)
-const ioServer = http.createServer();
-const chatIo = initializeSocket(ioServer);
-ioServer.listen(socketPort, () => {
-    console.log(`Chat Server is running on port: ${socketPort}`);
-});
-
-
-

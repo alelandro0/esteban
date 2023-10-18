@@ -1,44 +1,36 @@
-const { Server: SocketServer } = require("socket.io");
-const http = require("http");
 const chai = require("chai");
-const chaiHttp = require("chai-http");
+const io = require("socket.io-client");
 
 const expect = chai.expect;
 
-const initializeSocket = require("../socketConfig");
+const socketURL = "http://localhost:5000"; // Ajusta la URL del servidor Socket.io según tu configuración
 
-chai.use(chaiHttp);
-
-describe("Socket.io Backend Tests", function () {
-  let server, io, socketClient;
+describe("Socket.io Server Tests", function () {
+  let socket;
 
   before(function (done) {
-    server = http.createServer();
-    io = initializeSocket(server);
+    // Conecta al servidor de Socket.io antes de que comiencen las pruebas
+    socket = io.connect(socketURL);
 
-    server.listen(process.env.SOCKET_PORT,function () {
-      const port = server.address().SOCKET_PORT;
-      socketClient = io.of("/test-namespace");
-
-      done(); // Llama a done() para indicar que el servidor y el cliente Socket.io están listos
+    socket.on("connect", function () {
+      done();
     });
   });
 
   after(function (done) {
-    server.close();
+    // Desconecta el socket después de las pruebas
+    socket.disconnect();
     done();
   });
-  it("Should send and receive a message", function (done) {
-    const message = "Hello, Socket.io!";
-    socketClient.on("connection", (socket) => {
-      socket.emit("message", { body: message });
-  
-      socket.on("message", (data) => {
-        expect(data.body).to.equal(message);
-        done();
-      });
+
+  it("Debería recibir un mensaje de respuesta", function (done) {
+    socket.emit("test-event", { data: "Test Data" });
+
+    socket.on("response-event", function (response) {
+      expect(response).to.equal("¡Conexión exitosa con el servidor Socket.io!");
+      done();
     });
   });
-  
+
   
 });
