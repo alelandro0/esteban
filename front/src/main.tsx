@@ -7,6 +7,7 @@ import Signup from './routes/signup'
 import Dashboard from './routes/dashboard'
 import ProtectedRoute from './routes/protectedRaute'
 import { AuthProvider } from './Autenticacion/AutProvider'
+import {ChatClient} from './routes/chat.io'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard/>
+      },
+      {
+        path: "/chat",
+        element:<ChatClient/>
       }
+
     ]
   },
 ]

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { API_URL } from "../Autenticacion/constanst";
 import PortalLayout from "../layout/PortalLayout";
 import React from "react";
-import ChatIO from './chat.io'
+
 interface Todo {
   _id: string,
   title: string,
@@ -79,12 +79,12 @@ export default function Dashboard(){
   return (
     <PortalLayout>
       <h1 className="uno">Perfil de {auth.getUser()?.name || ""}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <input type="text" name="archivo" placeholder="crear Perfil" id="tarea" onChange={(e)=>seTitle(e.target.value)} value={title}></input>
       </form>
       {todos.map((todo)=>(<div id="resultado" key={todo._id}>{todo.title}</div>))}
       <br />
-      <ChatIO></ChatIO>
+     
     </PortalLayout>
   )
 }

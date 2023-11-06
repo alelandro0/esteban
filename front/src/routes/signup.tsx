@@ -6,6 +6,7 @@ import DefaultLayout from "../layout/DefaultLayout"
 import { API_URL } from "../Autenticacion/constanst";
 import type{ AuthResponseError } from "../types/types";
 
+
 export default function Signup(){
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -54,15 +55,15 @@ export default function Signup(){
   return (
     <DefaultLayout>
       <form className="form" onSubmit={handleSubmit}>
-        <h1>Signup</h1>
+        <h1 className="textLogin">Signup</h1>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-        <label>Nombre</label>
+        <label className="label">Nombre</label>
         <input type="text" value={name} onChange={(e)=>setName(e.target.value)}></input>
-        <label>Email</label>
+        <label className="label">Email</label>
         <input type="email" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
-        <label>password</label>
+        <label className="label">password</label>
         <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
-        <button>Create Usuario</button>
+        <button className="button">Create Usuario</button>
       </form>
     </DefaultLayout>
   

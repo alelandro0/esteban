@@ -1,0 +1,47 @@
+.form{
+ padding: 1.8rem;
+ background: url(../public/img/fondo.jpg);
+ background-position: center;
+ background-size: cover;
+ width: 400px;
+ 
+}
+.textLogin{
+    color: #eee;
+}
+.errorMessage {
+    background-color: #f2dede;
+    color: #a94442;
+    padding: 10px;
+}
+input[type="text"],
+[type="password"],[type="email"] {
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 5px 0 10px 0;
+
+}
+
+.box{
+    background:  rgb(33, 78, 117);
+    height: 50px;
+    display: flex;
+    align-items: center;
+
+}
+.button {
+    background-color: rgb(33, 78, 117);
+    background-position:bottom;
+    padding: 10px;
+    border: 0;
+    min-width: 100px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 9px;
+  }
+  .label{
+    color: #eee;
+    display: block;
+  }

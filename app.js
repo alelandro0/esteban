@@ -7,12 +7,20 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const { resolve, dirname } = require("path");
 const authenticate = require("./auth/authenticate.js");
-const initializeSocket = require("./socketConfig.js");
+const { Server: SocketServer } = require("socket.io");
+
+
 
 require("dotenv").config();
 
 const expressPort = process.env.PORT || 5000;
+const server= http.createServer(app)
 
+const io= new SocketServer(server,{
+    cors:{
+        origin:"*"
+    }
+});
 
 // Middlewares
 app.use(cors());
@@ -36,8 +44,12 @@ process.env.ACCESS_TOKEN_SECRET = ACCESS_TOKEN_SECRET;
 process.env.REFRESH_TOKEN_SECRET = REFRESH_TOKEN_SECRET;
 
 // Initializations
-const server = http.createServer(app);
-const io = initializeSocket(server);
+io.on('connection', socket=>{
+    console.log('conexion socketIO');
+    socket.on('message',(msg)=>{
+        socket.broadcast.emit('message',{ body: msg.body, user: msg.user});
+    })
+})
 
 async function main() {
     try {
@@ -54,6 +66,7 @@ async function main() {
 main();
 
 // Routes
+
 app.use("/api/signup", require("./routes/signup"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/user", authenticate, require("./routes/user"));

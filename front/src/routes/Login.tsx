@@ -5,6 +5,7 @@ import { useState } from "react"
 import { API_URL } from "../Autenticacion/constanst";
 import type { AuthResponse, AuthResponseError } from "../types/types";
 import React from "react";
+import './login.css'
 
 export default function Login(){
 
@@ -60,21 +61,21 @@ export default function Login(){
   };
 
   return (
-    <DefaultLayout>
+    <DefaultLayout >
       <form className="form" onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1 className="textLogin">Login</h1>
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-        <label>Email</label>
+        <label className="label">Email</label>
         <input 
           type="email" 
           value={username} 
           onChange={(e)=>setUsername(e.target.value)}></input>
-        <label>password</label>
+        <label className="label">password</label>
         <input 
           type="password" 
           value={password} 
           onChange={(e)=>setPassword(e.target.value)}></input>
-        <button>Login</button>
+        <button className="button">Login</button>
       </form>
     </DefaultLayout>
   

@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../Autenticacion/AutProvider";
 import { Link } from "react-router-dom";
 import { API_URL } from "../Autenticacion/constanst";
+import './nav.css'
 export default function PortalLayout({children}: {children:React.ReactNode}){
  const auth = useAuth();
 
@@ -27,18 +28,21 @@ export default function PortalLayout({children}: {children:React.ReactNode}){
     return (
         <>
         <header>
-          <nav>
-            <ul>
+          <nav className="box">
+            <ul className="componet">
               <li>
-                <Link to="#">Perfil</Link>
+                <Link style={{color:'white',fontSize:'25px', textDecoration:'none'}} to="/dashboard">Perfil</Link>
               </li>
               <li>
-                <Link to="/me">{auth.getUser()?.username ?? ""}</Link>
+                <Link style={{color:'white',fontSize:'25px', textDecoration:'none'}}  to="/me">Bienvenido {auth.getUser()?.name ?? ""}</Link>
               </li>
               <li>
-                <a href="#" onClick={handleSignOut}>
+                <a style={{color:'white',fontSize:'25px',textDecoration:'none'}} href="#" onClick={handleSignOut}>
                   Salir
                 </a>
+              </li>
+              <li>
+              <Link style={{color:'white',fontSize:'25px', textDecoration:'none'}}  to="/chat"  >Chat</Link>
               </li>
             </ul>
           </nav>
