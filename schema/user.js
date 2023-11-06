@@ -10,7 +10,7 @@ const UserSchema = new Mongoose.Schema({
     password: { type: String, required: true },
     name: { type: String, required: true },
 });
-
+UserSchema.index({username:1},{unique:true})
 UserSchema.pre("save", function (next) {
     if (this.isModified("password") || this.isNew) {
         const document = this;
